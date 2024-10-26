@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Mapper의 경로 적어줌 -->
+<mapper namespace="com.ssafy.product.model.mapper.ProductMapper">
+	
+	<resultMap type="com.ssafy.product.model.ProductDto" id="product">
+		<result column="code" property="code" />
+		<result column="model" property="model" />
+		<result column="price" property="price" />
+		<result column="id" property="id" />
+		<result column="regist_date" property="register_date" />
+		<result column="detail" property="desc" />
+	</resultMap>
+	
+	<select id="listProduct" resultMap="product">
+		select *
+		from product
+	</select>
+	
+	<select id="viewProduct" parameterType="String" resultMap="product">
+		select *
+		from product
+		where code=#{code}
+	</select>
+	
+	<insert id="registProduct" parameterType="com.ssafy.product.model.ProductDto">
+		insert into product (code, model, price, id, detail)
+		values (#{code}, #{model}, #{price}, #{id}, #{desc})
+	</insert>
+	
+	<delete id="deleteProduct" parameterType="String">
+		delete
+		from product
+		where code=#{code}
+	</delete>
+
+</mapper>
